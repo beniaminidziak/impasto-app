@@ -1,16 +1,22 @@
-# Impasto — Legal
+# Impasto — Public Site
 
-Public site for the legal pages of [Impasto](https://apps.apple.com/), a pizza dough recipe app for iOS.
+Public site for [Impasto](https://github.com/beniaminidziak/Impasto), a pizza dough recipe app for iOS.
 
-Hosted on GitHub Pages: <https://beniaminidziak.github.io/impasto-legal/>
+Hosted on GitHub Pages: <https://beniaminidziak.github.io/impasto-app/>
 
-## Pages
+## Structure
 
-- `index.html` — Privacy Policy
+```
+/                      Landing page (icon, wordmark, links to pages below)
+/privacy/              Privacy Policy
+icon.png               Shared app icon, referenced by every page
+```
+
+New pages live in their own folder with an `index.html` so URLs stay clean (`/support/` rather than `/support.html`). GitHub Pages serves `index.html` automatically for any folder.
 
 ## Updating
 
-Edit the HTML, commit to `main`, and GitHub Pages will redeploy automatically. When the policy substantively changes, bump the "Last updated" date in the footer and call out the change in the next app release notes.
+Edit the relevant HTML, commit to `main`, and GitHub Pages redeploys automatically. When the privacy policy substantively changes, bump the "Last updated" date in the footer and call out the change in the next app release notes.
 
 ## License
 
