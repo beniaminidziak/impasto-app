@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Privacy — Impasto</title>
+    <meta name="description" content="Impasto stores everything on your device. Nothing leaves. No accounts, no tracking, no analytics.">
+    <link rel="icon" href="icon.png" type="image/png">
+    <style>
+        :root {
+            --surface-bg: #FEFAE0;
+            --surface-primary: #F5EFCB;
+            --text-primary: #283618;
+            --text-secondary: #4A5635;
+            --text-tertiary: #7A8467;
+            --accent: #BC6C25;
+            --accent-on: #FEFAE0;
+            --border: #D9CFA0;
+
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 0.75rem;
+            --space-lg: 1rem;
+            --space-xl: 1.5rem;
+            --space-xxl: 2rem;
+
+            --radius-sm: 6px;
+            --radius-md: 12px;
+
+            --font-serif: "New York", "Charter", "Iowan Old Style", Georgia, serif;
+            --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --surface-bg: #1A1F12;
+                --surface-primary: #232B1A;
+                --text-primary: #EDE6CB;
+                --text-secondary: #C7C0A4;
+                --text-tertiary: #8E957F;
+                --accent: #D87E33;
+                --accent-on: #1A1F12;
+                --border: #3F4A2F;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+        }
+
+        body {
+            margin: 0;
+            background: var(--surface-bg);
+            color: var(--text-primary);
+            font-family: var(--font-system);
+            font-size: 1.0625rem;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: var(--space-lg);
+            background: var(--accent);
+            color: var(--accent-on);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            transition: top 0.15s ease;
+        }
+        .skip-link:focus {
+            top: var(--space-md);
+            outline: none;
+        }
+
+        header.site {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-xl) 0;
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        header.site .icon {
+            width: auto;
+            height: 44px;
+            display: block;
+            flex-shrink: 0;
+        }
+
+        header.site .wordmark {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            letter-spacing: -0.005em;
+        }
+
+        main {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: var(--space-xxl) var(--space-xl) calc(var(--space-xxl) * 2);
+        }
+
+        .eyebrow {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            margin: 0 0 var(--space-md);
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-weight: 500;
+            font-size: 2.75rem;
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-lg);
+            letter-spacing: -0.01em;
+        }
+
+        hr.rule {
+            width: 48px;
+            height: 2px;
+            background: var(--accent);
+            border: none;
+            border-radius: 1px;
+            margin: 0 0 var(--space-xl);
+        }
+
+        .lede {
+            font-family: var(--font-serif);
+            font-size: 1.3125rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            margin: 0 0 var(--space-xxl);
+            font-weight: 400;
+        }
+
+        .callout {
+            background: var(--surface-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: var(--space-xl);
+            margin: 0 0 calc(var(--space-xxl) * 1.25);
+        }
+
+        .callout .label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            margin: 0 0 var(--space-sm);
+        }
+
+        .callout ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .callout ul li {
+            font-family: var(--font-serif);
+            font-size: 1.125rem;
+            line-height: 1.4;
+            color: var(--text-primary);
+            padding: var(--space-xs) 0;
+        }
+
+        h2 {
+            font-family: var(--font-serif);
+            font-weight: 500;
+            font-size: 1.5rem;
+            line-height: 1.3;
+            color: var(--text-primary);
+            margin: var(--space-xxl) 0 var(--space-lg);
+        }
+
+        p {
+            margin: 0 0 var(--space-lg);
+            color: var(--text-primary);
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            transition: text-decoration-thickness 0.15s ease;
+        }
+        a:hover {
+            text-decoration-thickness: 2px;
+        }
+        a:focus-visible {
+            outline: 1.5px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+
+        hr.divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: calc(var(--space-xxl) * 1.25) 0 var(--space-xxl);
+        }
+
+        footer .label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            margin: 0 0 var(--space-sm);
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+
+        footer .updated {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            margin-top: var(--space-xl);
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.125rem; }
+            .lede { font-size: 1.1875rem; }
+            header.site,
+            main { padding-left: var(--space-lg); padding-right: var(--space-lg); }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <header class="site">
+        <img src="icon.png" alt="" class="icon">
+        <span class="wordmark">Impasto</span>
+    </header>
+
+    <main id="main">
+        <article>
+            <p class="eyebrow">Privacy</p>
+            <h1>Privacy Policy</h1>
+            <hr class="rule" aria-hidden="true">
+
+            <p class="lede">
+                Impasto stores everything on your device. Nothing leaves. There
+                is no account, no tracking, and no analytics.
+            </p>
+
+            <aside class="callout" aria-labelledby="callout-label">
+                <p class="label" id="callout-label">In short</p>
+                <ul>
+                    <li>No data collected.</li>
+                    <li>No data shared.</li>
+                    <li>No data stored off your device.</li>
+                </ul>
+            </aside>
+
+            <h2>What's stored on your device</h2>
+            <p>
+                Impasto saves your preferences and any recipes you create.
+                Active fermentation timers are tracked while in progress and
+                shown in Live Activities.
+            </p>
+
+            <h2>What leaves your device</h2>
+            <p>
+                Nothing. Impasto makes no network requests and contacts no
+                servers. It does not request, collect, or use your device's
+                location, contacts, photos, microphone, or any other sensor or
+                system data.
+            </p>
+            <p>
+                Impasto processes no personal data within the meaning of
+                Article 4(1) of the GDPR — there is no controller-side
+                processing because no data reaches a server. Your local data is
+                protected by the same iOS sandbox isolation that protects every
+                other app on your device.
+            </p>
+
+            <h2>Third-party libraries and services</h2>
+            <p>
+                Impasto does not integrate any third-party analytics,
+                advertising, crash reporting, or telemetry SDKs. The third-party
+                libraries it does include provide only computational primitives
+                — none collects, transmits, or otherwise processes user data.
+            </p>
+
+            <h2>How to remove your data</h2>
+            <p>
+                All Impasto data lives inside the app's iOS sandbox. To remove
+                it, delete the app from your device — iOS removes the
+                sandboxed data automatically as part of the standard uninstall.
+                There is no server-side account to close.
+            </p>
+
+            <h2>Children</h2>
+            <p>
+                Impasto is a general-audience cooking app. It is not directed
+                at children, and the app does not knowingly collect information
+                from anyone under 13 — or under 16 in jurisdictions where the
+                GDPR consent age is 16, including Poland.
+            </p>
+            <p>
+                If a parent or guardian has questions about the app on behalf
+                of a child user, please contact the data controller below.
+            </p>
+
+            <h2>Changes to this policy</h2>
+            <p>
+                If this policy changes, the new version will be published at
+                the same URL with an updated effective date below. Substantive
+                changes will also be noted in the next app update's release
+                notes.
+            </p>
+
+            <h2>Your rights under GDPR</h2>
+            <p>
+                Because Impasto does not collect or process personal data,
+                there are no controller-held records to access, correct,
+                export, or delete. If you believe this policy or the app
+                misrepresents its data practices, you may contact the data
+                controller below or file a complaint with your national
+                supervisory authority (in Poland: the President of the Personal
+                Data Protection Office, UODO).
+            </p>
+
+            <hr class="divider">
+
+            <footer>
+                <p class="label">Data controller</p>
+                <p>
+                    Beniamin Idziak<br>
+                    <a href="mailto:beniamin.idziak@icloud.com">beniamin.idziak@icloud.com</a>
+                </p>
+
+                <p class="updated">Last updated 17 May 2026</p>
+            </footer>
+        </article>
+    </main>
+</body>
+</html>
